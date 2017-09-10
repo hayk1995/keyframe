@@ -31,30 +31,31 @@ let Animation = {
         let stateControlButton = controlWindow.getElementsByClassName('f_state-controller')[0];
 
         stateControlButton.onclick = function () {
-            let currentState = htmlElement.style.animationPlayState;
-            if(currentState==='paused'){
-                htmlElement.style.animationPlayState = 'running';
+            let currentStates = htmlElement.style.animationPlayState.split(',');
+            if(currentStates[0]==='paused'){
+                currentStates.fill('running');
             }
             else {
-                htmlElement.style.animationPlayState = 'paused';
+                currentStates.fill('paused');
             }
+            htmlElement.style.animationPlayState = currentStates;
         }
     },
     
     initAnimationSeekBar:function (htmlElement, controlWindow) {
         let seekBar = controlWindow.getElementsByClassName('f_seek-bar')[0];
-
+        let animationDuration = this.getMaxDuration(htmlElement.style.animationDuration);
+        let htmlElementStyle = htmlElement.style;
+        let keyframeCount = htmlElementStyle.animationName.split(',').length;
         seekBar.oninput = function () {
-            let animationDuration = this.getMaxDuration(htmlElement.style.animationDuration);
             let delay = (animationDuration) * (seekBar.value)/100;
-            let htmlElementStyle = htmlElement.style;
             let currentAnimation = htmlElementStyle.animation;
 
             htmlElementStyle.animation = 'none';
             htmlElement.offsetWidth;
             htmlElementStyle.animation = currentAnimation;
-            htmlElementStyle.animationDelay = '-' + delay +'s';
-            htmlElementStyle.animationPlayState = 'paused';
+            htmlElementStyle.animationDelay = (new Array(keyframeCount)).fill('-'+delay+'s');
+            htmlElementStyle.animationPlayState = (new Array(keyframeCount)).fill('paused');
         }.bind(this)
     },
 
