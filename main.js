@@ -18,8 +18,9 @@ colorAnimation = new KeyFrame('colorAnimation',colorAnimation);
 colorAnimation.appendKeyFrameToDoc();
 
 var animatingElement = document.getElementById('animating');
-var animationShortEnd = 'colorAnimation 2.5s infinite,positionAnimation 5s infinite';
-
-Animation.init(animatingElement, animationShortEnd);
+let positionAnimationShorthand = createAnimationShorthand('positionAnimation',5);
+let colorAnimationShorthand = createAnimationShorthand('colorAnimation',2.5);
+let animationShorthand = positionAnimationShorthand + ' ,' + colorAnimationShorthand;
+Animation.init(animatingElement, animationShorthand);
 
 
