@@ -1,36 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        #animating {
-            width: 100px;
-            height: 100px;
-            background: red;
-            position: relative;
-            animation-name: mymove;
-            animation-duration: 5s;
-            animation-iteration-count: 1;
-        }
-
-        /* Standard syntax */
-        @keyframes mymove {
-            0%   {background-color:red; left:0px; top:0px;}
-            25%  {background-color:yellow; left:200px; top:0px;}
-            50%  {background-color:blue; left:200px; top:200px;}
-            75%  {background-color:green; left:0px; top:200px;}
-            100% {background-color:red; left:0px; top:0px;}
-        }
-
-
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style id="keyFrameWrap"></style>
 </head>
 <body>
 
 <p><strong>Note:</strong> The @keyframes rule is not supported in Internet Explorer 9 and earlier versions.</p>
 
-<div id="animating"></div>
+<div id="animating" ></div>
 
+<div class="controllers-window" id="controllersWidnow">
 
+</div>
+<div class="controll-window " id="controlWindow" style="display: none" >
+    <p class="animation-name"> AnimationName</p>
+    <button type="button" class="state-controller f_state-controller">Play/Pause</button>
+    <input class="seek-bar f_seek-bar" type="range" value="0" min="0" max="100" step="0.1">
+</div>
 </body>
+    <script src="util.js"></script>
+    <script src="createKeyframe.js"></script>
+    <script src="Animation.js"></script>
+    <script src="main.js"></script>
 </html>
